@@ -3,14 +3,14 @@
 ##    include("test_microcoverage.jl")
 ## It should display some messages on the
 ## console, and then a file called
-## test_microcoverage_ex2.jl.mcov should
+## test_microcoverage_ex.jl.mcov should
 ## be generated that should be the
 ## same as
-##   test_microcoverage_ex2.jl.mcov.correct
+##   test_microcoverage_ex.jl.mcov.correct
 
 include("microcoverage.jl")
 using microcoverage
-begintrack("test_microcoverage_ex2.jl")
+begintrack("test_microcoverage_ex.jl")
 include("test_microcoverage_ex.jl")
 test_microcoverage_ex.runfuncs()
-endtrack("test_microcoverage_ex2.jl")
+endtrack("test_microcoverage_ex.jl")
