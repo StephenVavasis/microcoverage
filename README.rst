@@ -27,7 +27,11 @@ Next, instruct the module to instrument your source code::
    begintrack("mysourcecode.jl")
    begintrack("myothersourcecode.jl")
 
-Now run your code as you normally would::
+Now run your code as you normally would.  Suppose, for example, that
+including
+``mytestruns.jl`` invokes many routines whose source code sits inside
+``mysourcecode.jl`` and ``myothersourcecode.jl``, so you generate
+these invocations::
 
    include("mytestruns.jl")
 
