@@ -8,9 +8,9 @@
 ## same as
 ##   test_microcoverage_ex.jl.mcov.correct
 
-include("microcoverage.jl")
+include(joinpath(Pkg.dir("microcoverage"), "microcoverage.jl"))
 using microcoverage
-begintrack("test_microcoverage_ex.jl")
-include("test_microcoverage_ex.jl")
+begintrack(joinpath(Pkg.dir("microcoverage"), "test_microcoverage_ex.jl"))
+include(joinpath(Pkg.dir("microcoverage"), "test_microcoverage_ex.jl"))
 test_microcoverage_ex.runfuncs()
-endtrack("test_microcoverage_ex.jl")
+endtrack(joinpath(Pkg.dir("microcoverage"), "test_microcoverage_ex.jl"))
