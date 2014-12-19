@@ -1,6 +1,6 @@
 ## To use this test routine, execute it
 ## from the REPL via 
-##    include("test_microcoverage.jl")
+##    include(joinpath(Pkg.dir("microcoverage"), "test_microcoverage.jl"))
 ## It should display some messages on the
 ## console, and then a file called
 ## test_microcoverage_ex.jl.mcov should
