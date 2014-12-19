@@ -2,7 +2,7 @@
 Microcoverage
 ------------------------------
 
-This module computes code coverage at a more fine-grained level than
+This module computes code coverage for a Julia program at a more fine-grained level than
 the built-in coverage feature.  Specifically, it provides coverage counts
 for each branch of the ||, && and ?: operators where they occur.  It
 also counts the number of invocations to statement-functions.
@@ -108,34 +108,34 @@ Limitations
 
 
 * The microcoverage module
-uses several undocumented aspects of the ``Expr`` type and the
-``parse`` function.  These aspects were discovered via trial and error.
-This means that they may change in a future version of Julia, so the module
-is rather fragile.
+  uses several undocumented aspects of the ``Expr`` type and the
+  ``parse`` function.  These aspects were discovered via trial and error.
+  This means that they may change in a future version of Julia, so the module
+  is rather fragile.
 * The module must be loaded at the REPL level, not inside any other module.  The reason
-is that the invocations to the counter-incrementing routine that are scattered
-through the instrumented code are of the following form:  ``Main.microcoverage.incrtrackarray(nn)``.
-Therefore, if the microcoverage module is nested inside of some other module, then the
-``incrtrackarray`` function won't be found.
+  is that the invocations to the counter-incrementing routine that are scattered
+  through the instrumented code are of the following form:  ``Main.microcoverage.incrtrackarray(nn)``.
+  Therefore, if the microcoverage module is nested inside of some other module, then the
+  ``incrtrackarray`` function won't be found.
 * The package does not work if the instrumented code is run in a forked
-process.  This is because the global variable associated with 
-the ``incrtrackarray`` routine will not be known to the other process.
-In particular, this means that the microcoverage
-module does not work if the instrumented
-code is run via Julia's package-testing
-mechanism: ``Pkg.test("mymodule").``  Instead, it is necessary
-to run the test within the same process using a statement like this::
+  process.  This is because the global variable associated with 
+  the ``incrtrackarray`` routine will not be known to the other process.
+  In particular, this means that the microcoverage
+  module does not work if the instrumented
+  code is run via Julia's package-testing
+  mechanism: ``Pkg.test("mymodule").``  Instead, it is necessary
+  to run the test within the same process using a statement like this::
 
    include(joinpath(Pkg.dir("mymodule"), "test", "runtests.jl"))
 
 * Once a ``begintrack`` instruction is executed, the microcoverage module
-should not be reloaded until after the corresponding
-call to ``endtrack`` because the global variables keeping track of the
-instrumented code are lost during the reloading
-process.  If it is necessary to reload microcoverage
-after a ``begintrack`` instruction, then the source code should be
-restored using the ``restore`` function provided
-in the module, as in the following snippet::
+  should not be reloaded until after the corresponding
+  call to ``endtrack`` because the global variables keeping track of the
+  instrumented code are lost during the reloading
+  process.  If it is necessary to reload microcoverage
+  after a ``begintrack`` instruction, then the source code should be
+  restored using the ``restore`` function provided
+  in the module, as in the following snippet::
 
     include("microcoverage.jl")
     using microcoverage
