@@ -1,0 +1,42 @@
+                * module test_microcoverage_ex
+L2        1     * function internalbranching(i)
+L3        4  ? ( 1 ) : ( 3  ? ( 1 ) : ( 2 ))
+                *     x = (i < 1)? 5 : ((i > 2)? 9 : 3)
+L4        4     *     x
+                * end
+                *                 
+                *                 
+L8        1  4 (called 4 time(s))
+                * statementfunction(x) = x+1
+                *                 
+L10       1     * function andor(k)
+L11       18    *     y = 0
+L12       18 ( 18 ) && ( 5 )
+                *     if k < 10 && k*k < 36
+L13       1     *         y = 8
+                *     end
+L15       18 ( 18 ) || ( 16 )
+                *     if k > 20 || k * k > 225
+L16       7     *         y = 9
+                *     end
+                * end
+                *                 
+L20       1     * function hasunreachablestmt(k)
+L21       1     *     return k * 19
+L22       0     *     x *= 10
+                * end
+                *                 
+                *                 
+L26       1     * function runfuncs()
+L27       1     *     for j = 0 : 3
+L28       4     *         internalbranching(j)
+L29       4     *         statementfunction(j)
+                *     end
+                *                     
+L32       1     *     for l = 5 : 22
+L33       18    *         andor(l)
+                *     end
+L35       1     *     hasunreachablestmt(5)
+                * end
+                * 
+                * end
