@@ -466,7 +466,7 @@ function restore(sourcefilename::ASCIIString)
         error("Cannot overwrite $sourcefilename; missing preamble statement")
     end
     println("renaming $renamed to $sourcefilename; machine-generated $sourcefilename overwritten")
-    mv(renamed, sourcefilename)
+    mv(renamed, sourcefilename, remove_destination=true)
 end    
 
 export restore
